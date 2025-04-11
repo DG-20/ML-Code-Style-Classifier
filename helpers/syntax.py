@@ -8,6 +8,7 @@ from javalang.tree import Node
 from .utils import children
 from .utils import get_nodes
 
+# Base class for features to enforce a common interface
 class Feature:
     def calculate(self, *args, **argv) -> Dict:
         pass
@@ -29,7 +30,8 @@ class MaxDepthASTNode(Feature):
     def calculate(tree: Node) -> Dict:
         return {'MaxDepthASTNode': MaxDepthASTNode.get_max_depth(tree)}
 
-
+# Calculates term frequency of bigrams in AST node transitions
+# E.g., If a `MethodDeclaration` has a `BlockStatement`, the bigram is "MethodDeclaration_BlockStatement"
 class ASTNodeBigramsTF(Feature):
     @staticmethod
     def get_bigrams(node) -> List:
@@ -54,7 +56,7 @@ class ASTNodeBigramsTF(Feature):
 
         return features
 
-
+# Calculates frequency of each node type in the AST (e.g., how many `IfStatement`, `ForStatement`, etc.)
 class ASTNodeTypesTF(Feature):
     @staticmethod
     def calculate(tree: Node) -> Dict:
@@ -69,7 +71,7 @@ class ASTNodeTypesTF(Feature):
 
         return features
 
-
+# Computes normalized frequency of each Java keyword token in the source
 class JavaKeywords(Feature):
     @staticmethod
     def calculate(tokens: List[JavaToken]) -> Dict:

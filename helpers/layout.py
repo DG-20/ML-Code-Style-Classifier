@@ -1,6 +1,7 @@
 from typing import Dict
 from .utils import non_empty_lines
 
+#These functions are used to calculate values that are required for analysis from the layout of the code
 
 def calculate_NumTabs(code: str) -> Dict:
     value = code.count('\t') / len(code)
